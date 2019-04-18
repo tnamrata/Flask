@@ -1,0 +1,26 @@
+<html>
+   <body>
+   	  <head>
+   	  	<p><h1>Deep Learning</p>
+   	  </head>
+   	  <p>
+   	  	<h3>Go on and select an image of your choice
+   	  </p>
+      <form action = "http://localhost:5000/uploader" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
+      </form>
+
+      <p>
+        Here is your Picture
+      </p>
+      <img src="{{ user_image }}" alt="User Image"></img>
+      <p>
+      	Please type your question here
+      </p>
+      <p>
+      	Here is your answer.
+      </p>
+   </body>
+</html>
