@@ -19,7 +19,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
 def index():
-	return render_template('wp3.html')
+	return render_template('upload.html')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -49,7 +49,7 @@ def upload():
 
 @app.route('/')
 def uploaded_file(filename):
-    return render_template('wp3.html', filename=filename)
+    return render_template('upload.html', filename=filename)
 
 @app.route('/')
 def send_file(filename):
