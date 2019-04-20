@@ -1,26 +1,84 @@
-<html>
-   <body>
-   	  <head>
-   	  	<p><h1>Deep Learning</p>
-   	  </head>
-   	  <p>
-   	  	<h3>Go on and select an image of your choice
-   	  </p>
-      <form action = "http://localhost:5000/uploader" method = "POST" 
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
-      </form>
 
-      <p>
-        Here is your Picture
-      </p>
-      <img src="{{ user_image }}" alt="User Image"></img>
-      <p>
-      	Please type your question here
-      </p>
-      <p>
-      	Here is your answer.
-      </p>
-   </body>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Visual QA </title>
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="underscore.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+		<script type="text/javascript" src="dropzone.min.js"></script>
+		<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
+		<link href="demo_style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="font/stylesheet.css" type="text/css" charset="utf-8" />
+		<script src="demo.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Deep Learning CSCI599: Visual Question Answering
+		</header>
+		<div class="content" >
+			<div class="half">
+				<div class="container">
+					<h2>1.Select a picture here!!!</h2>
+					<form id = 1 action="{{url_for('upload')}}" method = "POST" 
+         			enctype = "multipart/form-data">
+         			<input type = "file" name = "file" />
+
+         			<input type = "submit" name = "send">
+         		</form>
+         		<form id = 1 action="{{url_for('upload')}}" method = "POST" 
+         			enctype = "multipart/form-data">
+
+         			<p> Here is your Picture</p>
+         			<!-- <form id = 2 action = "{{url_for('upload')}}" method = "GET" enctype = "multipart/form-data" 
+         			 -->
+         			<form method = 'GET' action="/upload">
+    				
+    				 <!-- <h1>some text -->
+    				  <img src="{{ url_for('send_file', filename=filename) }}"
+         			</form>
+      				
+         	
+						<!-- <form action="api/upload_image" class="dropzone" id="my-dropzone"> -->
+					<!--     </form>
+				--></div>
+			</div>
+		</div>
+		<div class="half">
+			<h2>2. What is your question about the selected picture? &#8629;.   </h2>
+			<!-- <button onclick="computeLRP()" class="button computeLRP">Compute LRP</button> -->
+			<input type="text" placeholder="What is your question about the selected picture?" id="question" />
+			<input type = "submit" name = "send">
+
+			<h2>Here is your answer.</h2>
+			
+			<div id ="ans_div">
+				<div id="answer">
+				</div>
+				<div id="pred_answer">
+				</div>
+			</div>
+			<div id ="both_viz">
+				<div id="txt_viz">
+				</div>
+				<div id="viz1">
+				</div>
+				<!--	<div id="hm">
+				</div> -->
+			</div>
+			<div id="status">
+			</div>
+		</div>
+		
+	</div>
+	<hr>
+	<footer>
+		<div class="logo"><img src="qrcode-paper.png" alt="qrcode-paper"> </div>
+		<p><b>More information:</b><br /> Dual Recurrent Attention Units for VQA, <a href="https://arxiv.org/abs/1802.00209" onclick="return false">https://arxiv.org/abs/1802.00209</a></p>
+	
+</footer>
+</body>
 </html>
