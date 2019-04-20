@@ -1,54 +1,64 @@
+
+
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from flask.ext.uploads import UploadSet, configure_uploads, IMAGES
 from werkzeug.utils import secure_filename
+from gevent.pywsgi import WSGIServer
 
-# UPLOAD_FOLDER = '/path/to/the/uploads'
-# ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+UPLOAD_FOLDER = 'C:/Users/tnamr/OneDrive/Desktop/DL/flash/app/uploads'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 
-photos = UploadSet('photos', IMAGES)
+app.config.update(DEBUG = True)
+TEMPLATES_AUTO_RELOAD = True
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
-#app.debug = True
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
 def index():
-    return "Hello, World!"
+	return render_template('wp3.html')
 
-@app.route('/upload', methods=['GET', 'POST'])
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+# @app.route('/')
+# def index():
+#     return redirect('/0')
+
+@app.route('/', methods=['POST', 'GET'])
 def upload():
-    if request.method == 'POST' and 'photo' in request.files:
-    	filename = photos.save(request.files['photo'])
-    	return filename
-    return render_template('upload.html')
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
 
-@app.route('/uploads/<filename>')
+    target = os.path.join(APP_ROOT, 'uploads')
+    print(target)
+
+    if not os.path.isdir(target):
+    	os.mkdir(target)
+    global destination
+    for file in request.files.getlist("file"):
+    	print(file)
+    	filename = file.filename
+    	destination = "\\".join([target, filename])
+    	print(destination)
+    	file.save(destination)
+
+    return redirect(url_for('uploaded_file', filename=destination)) 
+
+@app.route('/')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)    
+    return render_template('wp3.html', filename=filename)
 
-@app.route('/display')
-def show_index():
-	full_filename = os.path.join(app.config['UPLOAD_FOLDER'])
-  	return render_template(upload.html, user_image=full_filename)
+@app.route('/')
+def send_file(filename):
+    return send_from_directory("UPLOAD_FOLDER", filename)
 
 if __name__ == '__main__':
 	app.run()
+
+
+
+
 
