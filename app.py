@@ -17,7 +17,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
 def index():
-	return render_template('wp3.html')
+	return render_template('upload.html')
 
 def allowed_file(filename):
     return '.' in filename and \
