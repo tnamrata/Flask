@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, send_from_
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 
-UPLOAD_FOLDER = 'C:/Users/tnamr/OneDrive/Desktop/DL/flash/app/uploads'
+UPLOAD_FOLDER = 'C:/Users/tnamr/OneDrive/Desktop/DL/flash/app/static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -17,7 +17,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
 def index():
-	return render_template('upload.html')
+    return render_template('upload.html')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -30,24 +30,20 @@ def allowed_file(filename):
 @app.route('/', methods=['POST', 'GET'])
 def upload():
 
-    target = os.path.join(APP_ROOT, 'uploads')
+    target = os.path.join(APP_ROOT, 'static')
    
 
     if not os.path.isdir(target):
-    	os.mkdir(target)
+        os.mkdir(target)
     global destination
     for file in request.files.getlist("file"):
-    	
-    	filename = file.filename
-    	destination = "\\".join([target, filename])
-    	
-    	file.save(destination)
-    print('my file bro')
+        
+        filename = file.filename
+        destination = "\\".join([target, filename])
+        
+        file.save(destination)
     
-    print(destination)
-    print(type(destination))
-    return render_template("template.html", file_nm = destination)
-    # return redirect(url_for('uploaded_file', filename=destination)) 
+    return render_template("template.html", img_nm = filename)
 
 @app.route('/', methods = ['POST', 'GET'])
 def uploaded_file(filename):
@@ -64,8 +60,3 @@ def send_file(filename):
 
 if __name__ == '__main__':
 	app.run()
-
-
-
-
-
