@@ -53,7 +53,6 @@
 </head>
 <body>
 
-	<body>
 		<header>
 			<h1>Deep Learning CSCI599: Visual Question Answering
 		</header>
@@ -63,21 +62,21 @@
 					<h2>1.Select a picture here!!!</h2>
 					<form id = 1 action="{{url_for('upload')}}" method = "POST" 
          			enctype = "multipart/form-data">
-         			<input type = "file" accept="uploads/*" name = "file" />
+         			<input type = "file" accept='static/*' name = "file" /n>
 
          			<input type = "submit" name = "send">
          		</form>
 
-         			<p> Here is your Picture</p>
+         			<!-- <p> Here is your Picture</p> -->
          			<!-- <form id = 2 action = "{{url_for('upload')}}" method = "GET" enctype = "multipart/form-data" 
          			 -->
-         			<form id =2 action="{{url_for('uploaded_file')}}" method = 'POST' enctype = "multipart/form-data">
+         			<!-- <form id =2 action="{{url_for('uploaded_file')}}" method = 'POST' enctype = "multipart/form-data">
     				
-    				 <!-- <h1>some text -->
-    				  <img src="{{ file) }}"
-         			</form>
-      				
-         	
+    				 <h1>some text -->
+    				  <!-- <img src="{{ (file) }}"
+         			
+         			</form> -->
+      			
 						<!-- <form action="api/upload_image" class="dropzone" id="my-dropzone"> -->
 					<!--     </form>
 				--></div>
