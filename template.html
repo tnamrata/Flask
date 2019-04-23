@@ -10,5 +10,33 @@
    <center>
     <img  style="display:block" src = "{{url_for("static", filename=img_nm)}}" width=300 height=300"></center>
     
+ <div class="half">
+			<center><h2>2. What is your question about the selected picture? &#8629;.   </h2>
+			<!-- <button onclick="computeLRP()" class="button computeLRP">Compute LRP</button> -->
+			<input type="text" placeholder="What is your question?" id="question" />
+			<input type = "submit" name = "send">
+
+			<h2>Here is your answer.</h2>
+			
+			<div id ="ans_div">
+				<div id="answer">
+				</div>
+				<div id="pred_answer">
+				</div>
+			</div>
+			<div id ="both_viz">
+				<div id="txt_viz">
+				</div>
+				<div id="viz1">
+				</div>
+				<!--	<div id="hm">
+				</div> -->
+			</div>
+			<div id="status">
+			</div>
+			</center>
+		</div>												    
+												    
+												    
 </body>
 </html>
