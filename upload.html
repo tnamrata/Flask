@@ -2,19 +2,57 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<title>Visual QA </title>
-		<script type="text/javascript" src="jquery.min.js"></script>
-		<script type="text/javascript" src="underscore.min.js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-		<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-		<script type="text/javascript" src="dropzone.min.js"></script>
-		<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
-		<link href="demo_style.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="font/stylesheet.css" type="text/css" charset="utf-8" />
-		<script src="demo.js" type="text/javascript" charset="utf-8"></script>
-	</head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	* {
+  		box-sizing: border-box;
+  		font-family: Arial, Helvetica, sans-serif;
+	}
+    
+	body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the content */
+.content {
+  background-color: #00F0FF;
+  padding: 10px;
+  height: 200px; /* Should be removed. Only for demonstration */
+}
+
+/* Style the footer */
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+
 	<body>
 		<header>
 			<h1>Deep Learning CSCI599: Visual Question Answering
@@ -25,20 +63,18 @@
 					<h2>1.Select a picture here!!!</h2>
 					<form id = 1 action="{{url_for('upload')}}" method = "POST" 
          			enctype = "multipart/form-data">
-         			<input type = "file" name = "file" />
+         			<input type = "file" accept="uploads/*" name = "file" />
 
          			<input type = "submit" name = "send">
          		</form>
-         		<form id = 1 action="{{url_for('upload')}}" method = "POST" 
-         			enctype = "multipart/form-data">
 
          			<p> Here is your Picture</p>
          			<!-- <form id = 2 action = "{{url_for('upload')}}" method = "GET" enctype = "multipart/form-data" 
          			 -->
-         			<form method = 'GET' action="/upload">
+         			<form id =2 action="{{url_for('uploaded_file')}}" method = 'POST' enctype = "multipart/form-data">
     				
     				 <!-- <h1>some text -->
-    				  <img src="{{ url_for('send_file', filename=filename) }}"
+    				  <img src="{{ file) }}"
          			</form>
       				
          	
@@ -47,38 +83,14 @@
 				--></div>
 			</div>
 		</div>
-		<div class="half">
-			<h2>2. What is your question about the selected picture? &#8629;.   </h2>
-			<!-- <button onclick="computeLRP()" class="button computeLRP">Compute LRP</button> -->
-			<input type="text" placeholder="What is your question about the selected picture?" id="question" />
-			<input type = "submit" name = "send">
-
-			<h2>Here is your answer.</h2>
-			
-			<div id ="ans_div">
-				<div id="answer">
-				</div>
-				<div id="pred_answer">
-				</div>
-			</div>
-			<div id ="both_viz">
-				<div id="txt_viz">
-				</div>
-				<div id="viz1">
-				</div>
-				<!--	<div id="hm">
-				</div> -->
-			</div>
-			<div id="status">
-			</div>
-		</div>
 		
-	</div>
+		
+	<!-- </div>
 	<hr>
 	<footer>
 		<div class="logo"><img src="qrcode-paper.png" alt="qrcode-paper"> </div>
 		<p><b>More information:</b><br /> Dual Recurrent Attention Units for VQA, <a href="https://arxiv.org/abs/1802.00209" onclick="return false">https://arxiv.org/abs/1802.00209</a></p>
 	
-</footer>
+</footer> -->
 </body>
 </html>
