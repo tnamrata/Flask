@@ -1,5 +1,3 @@
-
-
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
@@ -19,7 +17,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
 def index():
-	return render_template('upload.html')
+	return render_template('wp3.html')
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -33,27 +31,36 @@ def allowed_file(filename):
 def upload():
 
     target = os.path.join(APP_ROOT, 'uploads')
-    print(target)
+   
 
     if not os.path.isdir(target):
     	os.mkdir(target)
     global destination
     for file in request.files.getlist("file"):
-    	print(file)
+    	
     	filename = file.filename
     	destination = "\\".join([target, filename])
-    	print(destination)
+    	
     	file.save(destination)
+    print('my file bro')
+    
+    print(destination)
+    print(type(destination))
+    return render_template("template.html", file_nm = destination)
+    # return redirect(url_for('uploaded_file', filename=destination)) 
 
-    return redirect(url_for('uploaded_file', filename=destination)) 
-
-@app.route('/')
+@app.route('/', methods = ['POST', 'GET'])
 def uploaded_file(filename):
-    return render_template('upload.html', filename=filename)
+    file = "\\".join([filename, ])
+    print('my file')
+    print(filename)
+    return render_template('template.html', file_nm=filename)
 
+'''
 @app.route('/')
 def send_file(filename):
     return send_from_directory("UPLOAD_FOLDER", filename)
+'''
 
 if __name__ == '__main__':
 	app.run()
